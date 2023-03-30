@@ -1,4 +1,4 @@
-
+package micompi;
 
 class nodo {
     String lexema;
