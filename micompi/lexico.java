@@ -14,21 +14,21 @@ class lexico {
     int matriz[] []= {
         //      0       1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27
         //      l       @    _    d    +    -    *    /    ^    <    >    =    !    &    |    (    )    {    }     ,   ;    "   eb  tab    nl   .   eof  oc
-        /*0*/  {1,      1,   1,   2, 103, 104, 105,   5, 107,   8,   9,  10,  11,  12,  13, 117, 118, 119, 120, 124, 124,  14,   0,   0,   0, 505, 505, 505},
+        /*0*/  {1,      1,   1,   2, 103, 104, 105,   5, 107,   8,   9,  10,  11,  12,  13, 117, 118, 119, 120, 124, 125,  14,   0,   0,   0, 505,   0, 505},
         /*1*/  {1,      1,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},
-        /*2*/  {101,  101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101,   3, 101},
+        /*2*/  {101,  101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101,   3, 101, 101},
         /*3*/  {500,  500, 500,   4, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500},
         /*4*/  {102,  102, 102,   4, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102},
         /*5*/  {106,  106, 106, 106, 106, 106,   6, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106},
-        /*6*/  {6,      6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6},
-        /*7*/  {6,      6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6},
+        /*6*/  {6,      6,   6,   6,   6,   6,   7,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6, 501,   6},
+        /*7*/  {6,      6,   6,   6,   6,   6,   6,   0,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6, 501,   6},
         /*8*/  {108,  108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 110, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108},
         /*9*/  {109,  109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 111, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109},
         /*10*/ {123,  123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 112, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123},
         /*11*/ {116,  116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 113, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116},
-        /*12*/ {502,  502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 114, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502},
-        /*13*/ {503,  503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 115, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503} ,     
-        /*14*/ { 14,   14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14, 122,  14,  14,  14, 504,  14,  14,  14}
+        /*12*/ {502,  502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 114, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502},
+        /*13*/ {503,  503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 115, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503} ,     
+        /*14*/ { 14,   14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14, 14,  122,  14,  14, 504,  14, 504,  14}
     };
 
 
@@ -47,7 +47,8 @@ class lexico {
         /*9*/{"int", "209"},
         /*10*/{"false", "210"},
         /*11*/{"true", "211"},
-        /*12*/{"string", "212"}
+        /*12*/{"string", "212"},
+        /*13*/{"bool", "213"}
     };
 
     String errores[][]={
@@ -67,67 +68,91 @@ class lexico {
             file= new RandomAccessFile(archivo, "r");
             while(caracter!=-1){
                 caracter = file.read();
-                
                 if(Character.isLetter(((char)caracter))){
                     columna=0;
                 }else if(Character.isDigit((char)caracter)){
                     columna=3;
+                }else if (caracter == -1){
+                    columna = 26;
                 }else{
                     switch((char)caracter){
-                        case '@': columna=1;
+                        case '@':
+                            columna = 1;
                             break;
-                        case '_': columna=2;
+                        case '_':
+                            columna = 2;
                             break;
-                        case '+': columna=4;
+                        case '+':
+                            columna = 4;
                             break;
-                        case '-': columna=5;
+                        case '-':
+                            columna = 5;
                             break;
-                        case '*': columna = 6;
+                        case '*':
+                            columna = 6;
                             break;
-                        case '/': columna =7;
+                        case '/':
+                            columna = 7;
                             break;
-                        case '^': columna=8;
+                        case '^':
+                            columna = 8;
                             break;
-                        case '<': columna =9;
+                        case '<':
+                            columna = 9;
                             break;
-                        case '>': columna=10;
+                        case '>':
+                            columna = 10;
                             break;
-                        case '=': columna=11;
+                        case '=':
+                            columna = 11;
                             break;
-                        case '!': columna = 12;
+                        case '!':
+                            columna = 12;
                             break;
-                        case '&': columna=13;
+                        case '&':
+                            columna = 13;
                             break;
-                        case '|': columna=14;
+                        case '|':
+                            columna = 14;
                             break;
-                        case '(': columna=15;
+                        case '(':
+                            columna = 15;
                             break;
-                        case ')': columna=16;
+                        case ')': 
+                            columna = 16;
                             break;
-                        case '{': columna=17;
+                        case '{':
+                            columna = 17;
                             break;
-                        case '}': columna=18;
+                        case '}':
+                            columna = 18;
                             break;
-                        case ',': columna =19;
+                        case ',':
+                            columna = 19;
                             break;
-                        case ';': columna=20;
+                        case ';':
+                            columna = 20;
                             break;
-                        case '"': columna=21;
+                        case '"':
+                            columna = 21;
                             break;
-                        case 32: columna=22;
+                        case 32:
+                            columna = 22;
                             break;
-                        case 9: columna=23;
+                        case 9:
+                            columna = 23;
                             break;
-                        case 10: columna=24;
-                        numRenglon = numRenglon +1; 
+                        case 10:
+                            columna=24;
+                            numRenglon = numRenglon + 1; 
                             break;
-                        case '.': columna=25;
+                        case '.':
+                            columna = 25;
                             break;
-                        case 3: columna=26;
-                            break;
-                        case 13: columna=24;
-                            numRenglon = numRenglon +1;
-                        default: columna=27;
+                        case 13:
+                            columna = 24;
+                        default:
+                            columna = 27;
                             break;
                     }
                 }
@@ -145,9 +170,9 @@ class lexico {
                     if  (valorMT==100) {
                         validarPalabraReservada();
                     }
-                    if (valorMT==100||valorMT==101||valorMT==102||valorMT==103||valorMT==104||valorMT==105||
-                    valorMT==106||valorMT==107||valorMT==108||valorMT==109||valorMT==110||valorMT==111||
-                    valorMT==112||valorMT==113||valorMT==114||valorMT==115||valorMT==116||valorMT<200) {
+                    if (valorMT==100||valorMT==101||valorMT==102||
+                    valorMT==106||valorMT==108||valorMT==109||
+                    valorMT==123||valorMT==116) {
                         file.seek(file.getFilePointer()-1);
                     } else {
                         lexema=lexema+(char)caracter;
@@ -160,8 +185,12 @@ class lexico {
                     imprimirMensajeError();
                     break;
                 }
+                
+                System.out.println("Columna " + columna);
+                System.out.println("valorMT " + valorMT);
             }
             imprimirNodos();
+            
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -176,41 +205,44 @@ class lexico {
         }
     }
 
-    private void validarPalabraReservada () {
-        for (String[] palReservada : palReservadas) {
-            if (lexema.equals (palReservada[0]) ) {
-            valorMT = Integer.valueOf(palReservada[1]);
+    private void validarPalabraReservada() {
+        for(String[] palReservada : palReservadas){
+            if(lexema.equals(palReservada[0])){
+                valorMT = Integer.valueOf(palReservada[1]);
             }
         }
     }
 
-    private void imprimirNodos() {
-        p = cabeza;
-        while (p!=null) {
+    private void imprimirNodos(){
+        p=cabeza;        
+        while(p!=null){
             System.out.println(p.lexema + " " + p.token + " " + p.renglon);
             p = p.sig;
         }
     }
 
-    private void imprimirMensajeError() {
-        if (caracter != -1 && valorMT >= 500) {
+    private void imprimirMensajeError(){
+        System.out.println("columna " + columna);
+        System.out.println("caracter " + caracter);
+        System.out.println("valorMT " + valorMT);
+        if ((caracter != -1 && valorMT >= 500) || (caracter == -1 && valorMT>=500 )) {
             for (String[] errore : errores) {
                 if (valorMT == Integer.valueOf(errore[1])) {
                     System.out.println("El error encontrado es: " + errore[0] + " error " + valorMT );
                 }
             }
-            errorEncontrado = true;
+        errorEncontrado = true;
         }
     }
 
-    private void insertarNodo() {
+    private void insertarNodo(){
         nodo nodo = new nodo(lexema, valorMT, numRenglon);
         if (cabeza == null) {
-            cabeza=nodo;
-            p=cabeza;
+            cabeza = nodo;
+            p = cabeza;
         } else {
-            p.sig=nodo;
-            p=nodo;
+            p.sig = nodo;
+            p = nodo;
         }
     }
 
