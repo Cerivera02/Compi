@@ -4,34 +4,31 @@ import java.io.RandomAccessFile;
 
 class lexico {
     nodo cabeza = null, p;
-    int estado = 0, columna, valorMT, numRenglon = 1;
-    int caracter = 0;
-    String lexema = "";
+    int columna, valorMT, numRenglon = 1, estado = 0, caracter = 0;
     boolean errorEncontrado = false;
-
-    String archivo = "C:\\Proyectos\\Compi\\prueba.txt";
-
-    int matriz[] []= {
-        //      0       1    2    3    4    5    6    7    8    9   10   11   12   13   14   15   16   17   18   19   20   21   22   23   24   25   26   27
-        //      l       @    _    d    +    -    *    /    ^    <    >    =    !    &    |    (    )    {    }     ,   ;    "   eb  tab    nl   .   eof  oc
-        /*0*/  {1,      1,   1,   2, 103, 104, 105,   5, 107,   8,   9,  10,  11,  12,  13, 117, 118, 119, 120, 124, 125,  14,   0,   0,   0, 505,   0, 505},
-        /*1*/  {1,      1,   1,   1, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100},
-        /*2*/  {101,  101, 101,   2, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101, 101,   3, 101, 101},
-        /*3*/  {500,  500, 500,   4, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500},
-        /*4*/  {102,  102, 102,   4, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102, 102},
-        /*5*/  {106,  106, 106, 106, 106, 106,   6, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106, 106},
-        /*6*/  {6,      6,   6,   6,   6,   6,   7,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6, 501,   6},
-        /*7*/  {6,      6,   6,   6,   6,   6,   6,   0,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6,   6, 501,   6},
-        /*8*/  {108,  108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 110, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108, 108},
-        /*9*/  {109,  109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 111, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109, 109},
-        /*10*/ {123,  123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 112, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123, 123},
-        /*11*/ {116,  116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 113, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116, 116},
-        /*12*/ {502,  502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 114, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502, 502},
-        /*13*/ {503,  503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 115, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503, 503} ,     
-        /*14*/ { 14,   14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14,  14, 14,  122,  14,  14, 504,  14, 504,  14}
-    };
+    String lexema = "";
+    String archivo = "C:\\Proyectos\\Compi\\Ejercicio.compi";
 
 
+    int matriz[][]={
+        /*          0      1     2     3     4     5     6     7     8     9    10    11    12    13    14    15    16    17    18    19    20    21    22    23    24    25    26    27    28  */
+        /*          l      @     _     d     +     -     *     /     ^     <     >     =     !     &     |     (     )     {     }     ,     ;     "    eb   tab    nl     .   eof    oc    rt  */
+        /* 0 */{    1,     1,    1,    2,  103,  104,  105,    5,  107,    8,    9,   10,   11,   12,   13,  117,  118,  119,  120,  124,  125,   14,    0,    0,    0,  505,    0,  505,    0},
+        /* 1 */{    1,     1,    1,    1,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100,  100}, 
+        /* 2 */{  101,   101,  101,    2,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,  101,    3,  101,  101,  101},
+        /* 3 */{  500,   500,  500,    4,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500,  500},
+        /* 4 */{  102,   102,  102,    4,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102,  102}, 
+        /* 5 */{  106,   106,  106,  106,  106,  106,    6,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106,  106},
+        /* 6 */{    6,     6,    6,    6,    6,    6,    7,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,  501,    6,    6}, 
+        /* 7 */{    6,     6,    6,    6,    6,    6,    6,    0,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,    6,  501,    6,    6},
+        /* 8 */{  108,   108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  110,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108,  108},
+        /* 9 */{  109,   109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  111,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109,  109},
+        /* 10 */{ 123,   123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  112,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123,  123},
+        /* 11 */{ 116,   116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  113,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116,  116},
+        /* 12 */{ 502,   502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  114,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502},
+        /* 13 */{ 503,   503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  115,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503},
+        /* 14 */{  14,    14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,  122,   14,   14,  504,   14,  504,   14,  504}
+};
 
     String palReservadas[][]={
         //      0        1
@@ -64,18 +61,16 @@ class lexico {
     RandomAccessFile file= null;
 
     public lexico(){
-        try{
-            file= new RandomAccessFile(archivo, "r");
-            while(caracter!=-1){
+        try {
+            file = new RandomAccessFile(archivo, "r");
+            while (caracter != -1) {
                 caracter = file.read();
-                if(Character.isLetter(((char)caracter))){
-                    columna=0;
-                }else if(Character.isDigit((char)caracter)){
-                    columna=3;
-                }else if (caracter == -1){
-                    columna = 26;
-                }else{
-                    switch((char)caracter){
+                if (Character.isLetter(((char) caracter))) {
+                    columna = 0;
+                } else if (Character.isDigit(((char) caracter))) {
+                    columna = 3;
+                } else {
+                    switch ((char) caracter) {
                         case '@':
                             columna = 1;
                             break;
@@ -118,7 +113,7 @@ class lexico {
                         case '(':
                             columna = 15;
                             break;
-                        case ')': 
+                        case ')':
                             columna = 16;
                             break;
                         case '{':
@@ -136,23 +131,30 @@ class lexico {
                         case '"':
                             columna = 21;
                             break;
-                        case 32:
+                        case ' ':
                             columna = 22;
                             break;
                         case 9:
                             columna = 23;
                             break;
                         case 10:
-                            columna=24;
-                            numRenglon = numRenglon + 1; 
+                        {
+                            columna = 24;
+                            numRenglon = numRenglon + 1;
+                        }
+                        break;
+                        case 13:
+                            columna = 28;
                             break;
                         case '.':
                             columna = 25;
                             break;
-                        case 13:
-                            columna = 24;
                         default:
-                            columna = 27;
+                            if (caracter==-1) {
+                                columna=26;
+                            }else{
+                              columna = 27;  
+                            }
                             break;
                     }
                 }
@@ -170,13 +172,11 @@ class lexico {
                     if  (valorMT==100) {
                         validarPalabraReservada();
                     }
-                    if (valorMT==100||valorMT==101||valorMT==102||
-                    valorMT==106||valorMT==108||valorMT==109||
-                    valorMT==123||valorMT==116) {
+                    if (valorMT==100|| valorMT==101||valorMT==102||valorMT==106||valorMT==123||valorMT==108||
+                    valorMT==109||valorMT==116||valorMT>=200){
                         file.seek(file.getFilePointer()-1);
-                    } else {
-                        lexema=lexema+(char)caracter;
-                        
+                    }else{
+                        lexema=lexema+(char)caracter;                        
                     }
                     insertarNodo();
                     estado = 0;
@@ -186,24 +186,23 @@ class lexico {
                     break;
                 }
                 
-                System.out.println("Columna " + columna);
-                System.out.println("valorMT " + valorMT);
             }
             imprimirNodos();
-            
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        } finally {
+        }finally{
             try {
-                if (file!= null) {
-                    file.close();
-                }
+                if (file !=null) {
+                file.close(); 
+            }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-        }
+    
+            
     }
+    }
+    
 
     private void validarPalabraReservada() {
         for(String[] palReservada : palReservadas){
@@ -222,16 +221,27 @@ class lexico {
     }
 
     private void imprimirMensajeError(){
-        System.out.println("columna " + columna);
-        System.out.println("caracter " + caracter);
-        System.out.println("valorMT " + valorMT);
-        if ((caracter != -1 && valorMT >= 500) || (caracter == -1 && valorMT>=500 )) {
-            for (String[] errore : errores) {
-                if (valorMT == Integer.valueOf(errore[1])) {
-                    System.out.println("El error encontrado es: " + errore[0] + " error " + valorMT );
+        if ((caracter !=-1 && valorMT>=500)) {
+            for (String[] error : errores) {
+                if (valorMT == Integer.valueOf(error[1])) {
+                    System.out.println("El error encontrado es:" +error[0]+", error "+valorMT+" caracter "+caracter+
+                    " en el renglon "+numRenglon);
                 }
             }
-        errorEncontrado = true;
+            errorEncontrado=true;
+        }else if ( (caracter ==-1)&& valorMT>=500) {
+            for (String[] error : errores) {
+                if (valorMT == Integer.valueOf(error[1])) {
+                    try {
+                        file.seek(file.getFilePointer()-1);
+                        caracter = file.read();
+                    } catch (Exception e) {
+                    }
+                    System.out.println("El error encontrado es:" +error[0]+", error "+valorMT+" caracter "+caracter+
+                    " en el renglon "+numRenglon);
+                }
+            }
+            errorEncontrado=true;
         }
     }
 

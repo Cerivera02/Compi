@@ -2,8 +2,7 @@ package micompi;
 
 class nodo {
     String lexema;
-    int token;
-    int renglon;
+    int token, renglon;
     nodo sig = null;
     nodo (String lexema, int token, int renglon) {
         this.lexema = lexema;

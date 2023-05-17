@@ -1,0 +1,7 @@
+main () {
+    print "Se realizara la pantalla "; 
+    /*Realizaremos un condicional para ver cual numero es mayor*/
+    while (n>4) {
+        print n;
+    }
+}

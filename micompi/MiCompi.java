@@ -8,6 +8,6 @@ public class MiCompi {
         lexico lexico = new lexico();
         if (!lexico.errorEncontrado) {
             System.out.println("Analisis lexico terminado");
-        }       
+        }
     }
 }
