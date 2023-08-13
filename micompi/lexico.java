@@ -28,7 +28,7 @@ class lexico {
         /* 12 */{ 502,   502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  114,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502,  502},
         /* 13 */{ 503,   503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  115,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503,  503},
         /* 14 */{  14,    14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,  122,   14,   14,  504,   14,  504,   14,  504}
-};
+    };
 
     String palReservadas[][]={
         //      0        1
@@ -45,7 +45,9 @@ class lexico {
         /*10*/{"false", "210"},
         /*11*/{"true", "211"},
         /*12*/{"string", "212"},
-        /*13*/{"bool", "213"}
+        /*13*/{"bool", "213"},
+        /*14*/{"getvalue", "214"}
+        
     };
 
     String errores[][]={
@@ -58,7 +60,7 @@ class lexico {
         /*5*/{"Caracter no valido",             "505"} 
     };
 
-    RandomAccessFile file= null;
+    RandomAccessFile file = null;
 
     public lexico(){
         try {
@@ -158,9 +160,7 @@ class lexico {
                             break;
                     }
                 }
-                
                 valorMT = matriz[estado][columna];
-                
                 if (valorMT<100) {
                     estado=valorMT;
                     if (estado==0){
@@ -188,6 +188,7 @@ class lexico {
                 
             }
             imprimirNodos();
+            sintaxis();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }finally{
@@ -198,9 +199,7 @@ class lexico {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-    
-            
-    }
+        }
     }
     
 
@@ -224,8 +223,7 @@ class lexico {
         if ((caracter !=-1 && valorMT>=500)) {
             for (String[] error : errores) {
                 if (valorMT == Integer.valueOf(error[1])) {
-                    System.out.println("El error encontrado es:" +error[0]+", error "+valorMT+" caracter "+caracter+
-                    " en el renglon "+numRenglon);
+                    System.out.println("El error encontrado es:" + error[0] + ", error " + valorMT + " caracter " + caracter + " en el renglon "+numRenglon);
                 }
             }
             errorEncontrado=true;
@@ -237,8 +235,7 @@ class lexico {
                         caracter = file.read();
                     } catch (Exception e) {
                     }
-                    System.out.println("El error encontrado es:" +error[0]+", error "+valorMT+" caracter "+caracter+
-                    " en el renglon "+numRenglon);
+                    System.out.println("El error encontrado es:" + error[0]+ ", error " + valorMT + " caracter "+ caracter + " en el renglon " + numRenglon);
                 }
             }
             errorEncontrado=true;
@@ -256,4 +253,437 @@ class lexico {
         }
     }
 
+    private void sintaxis() {
+        p = cabeza;
+        while (p!=null) {
+            if (p!= null && p.token == 203) {
+                p = p.sig;
+                if (p!= null && p.token == 117) {
+                    p = p.sig;
+                    if (p!= null && p.token == 118) {
+                        p = p.sig;
+                        if (p!= null && p.token == 119) {
+                            p = p.sig;
+                            if (p.token == 201 ||p.token == 204 || p.token == 205 || 
+                                p.token == 206 || p.token == 214) 
+                            {                               
+                                 statements();
+                            } else {
+                                variables();
+                                statements();
+                            }
+                            if (p.token != 120) {
+                                System.out.println("Se espera un }");
+                                System.exit(0);
+                            }else{
+                                p=p.sig;
+                            }
+                        } else {
+                            System.out.println("Se espera un {");
+                            System.exit(0);
+                        }
+                    } else {
+                        System.out.println("Se espera )");
+                        System.exit(0);
+                    }
+                }else{
+                    System.out.println("Se espera ( ");
+                    System.exit(0);
+                }
+            } else {
+                System.out.println("Se espera la palabra main");
+                System.exit(0);
+            }
+        }
+        System.out.println("Analisis Sintactico Terminado");
+    }
+
+    private void statements() {
+        if (p != null) {
+        switch (p.token){
+            case 201:
+                p=p.sig;
+                if(p.token==117){
+                    p=p.sig;
+                    expCondicional();
+                    if(p.token==118){
+                        p=p.sig;
+                        if(p.token==119){
+                            p=p.sig;
+                            statements();
+                            if(p.token==120){
+                                p=p.sig;
+                                statements();
+                                if(p.token==202){
+                                    p=p.sig;
+                                    if(p.token==119){
+                                        p=p.sig;
+                                        statements();
+                                        if(p.token==120){
+                                            p=p.sig;
+                                            statements();
+                                        }else{
+                                            System.out.println("Se espera un }");
+                                            System.exit(0);
+                                        }
+                                    }else{
+                                        System.out.println("Se espera un {");
+                                        System.exit(0);
+                                    }
+                                }
+                            }else{
+                                System.out.println("Se espera un }");
+                                System.exit(0);
+                            }
+                        }else{
+                            System.out.println("Se espera un {");
+                            System.exit(0);
+                        }
+                    }else{
+                        System.out.println("Se espera un )");
+                        System.exit(0);
+                    }
+                }else{
+                    System.out.println("Se espera un (");
+                    System.exit(0);
+                }
+                break;
+            case 204:
+                p=p.sig;
+                if(p.token==117){
+                    p=p.sig;
+                    expCondicional();
+                    if(p.token==118){
+                        p=p.sig;
+                        if(p.token==119){
+                            p=p.sig;
+                            statements();
+                            if(p.token==120){
+                                p=p.sig;
+                                statements();
+                            }else{
+                                System.out.println("Se espera un }");
+                                System.exit(0);
+                            }
+                        }else{
+                            System.out.println("Se espera un {");
+                            System.exit(0);
+                        }
+                    }else{
+                        System.out.println("Se espera un )");
+                        System.exit(0);
+                    }
+                }else{
+                    System.out.println("Se espera un (");
+                    System.exit(0);
+                }
+                break;
+            case 206:
+                p=p.sig;
+                if(p.token==117){
+                    p=p.sig;
+                    if(p.token==100 || p.token == 122){
+                        p=p.sig;
+                        if(p.token==124){
+                            idRecursivo();
+                        }else{
+                            if(p.token==118){
+                                p=p.sig;
+                                if(p.token==125){
+                                    p=p.sig;
+                                    statements();
+                                }else{
+                                    System.out.println("Se espera un ;");
+                                    System.exit(0);
+                                }
+                            }else{
+                                System.out.println("Se espera un )");
+                                System.exit(0);
+                            }
+                        } 
+                    }else{
+                        System.out.println("Se espera un id o una cadena de texto");
+                        System.exit(0);
+                    }
+                }else{
+                    System.out.println("Se espera un (");
+                    System.exit(0);
+                }
+                break;
+            case 214:
+                p=p.sig;
+                if(p.token==117){
+                    p=p.sig;
+                    if(p.token==118){
+                        p=p.sig;
+                        if (p.token == 125) {
+                            p=p.sig;
+                            statements();
+                        } else {
+                            System.out.println("Se espera un ;");
+                            System.exit(0);
+                        }
+                    }else{
+                        System.out.println("Se espera un )");
+                        System.exit(0);
+                    }
+                }else{
+                    System.out.println("Se espera un (");
+                    System.exit(0);
+                }
+                
+                break;
+            case 100:
+                p=p.sig;
+                if(p.token==123){
+                    p=p.sig;
+                    expSimple();
+                    if(p.token==125){
+                        p=p.sig;
+                        statements();
+                    }else if(p.token==210 || p.token==211){
+                        p=p.sig;
+                        if (p.token != 125) {
+                            System.out.println("Se espera un ;");
+                            System.exit(0);
+                        } else {
+                            p = p.sig;
+                            statements();
+                        }
+                    }else if(p.token==103 || p.token == 104){
+                        p = p.sig;
+                        expSimple();
+                        if (p.token == 125) {
+                            p = p.sig;
+                            statements();
+                        } else {
+                            System.out.println("Se espera un ;");
+                            System.exit(0);
+                        }
+                    }else{
+                        System.out.println("Se espera un ;");
+                        System.exit(0);
+                    }
+                    
+                }else{
+                    System.out.println("Se espera un =");
+                    System.exit(0);
+                }
+                break;
+            
+            }
+        } else {
+            System.out.println("Se espera una }");
+            System.exit(0);
+        }
+    }
+
+    private void expCondicional(){
+        expSimple();
+        operadorRelacional();
+        expSimple();
+    }
+
+    private void operadorAditivo() {
+        switch (p.token) {
+            case 104:
+                p = p.sig;
+                break;
+            case 103:
+                p = p.sig;
+                break;
+            case 115:
+               p=p.sig;
+               break;
+
+            default:
+                System.out.println("Se espera un operador");
+                System.exit(0);
+                break;
+        }
+    }
+
+    private void operadorRelacional() {
+        switch (p.token) {
+            case 109:
+                p = p.sig;
+                break;
+            case 108:
+                p = p.sig;
+                break;
+            case 111:
+                p = p.sig;
+                break;
+            case 110:
+                p = p.sig;
+                break;
+            case 112:
+                p = p.sig;
+                break;
+            case 113:
+                p = p.sig;
+                break;
+            
+            default:
+            System.out.println("Falta un operador relacional < > <= >= == !=");
+            System.exit(0);    
+            break;
+        }
+    }
+
+    private void operadorMult() {
+        switch (p.token) {
+            case 105:
+                p = p.sig;
+                break;
+            case 106:
+                p = p.sig;
+                break;
+            case 114:
+                p = p.sig;
+                break;
+           
+        }
+    }
+
+    private void signo() {
+        switch (p.token) {
+            case 104:
+                p = p.sig;
+                break;
+        
+            default:
+                p = p.sig;
+                break;
+        }
+    }
+
+    private void idRecursivo(){
+        if(p!=null && p.token==124){
+            p = p.sig;
+            if (p!= null && p.token == 100) {
+                p = p.sig; 
+                if(p!=null && p.token == 124){
+                idRecursivo();
+                }  
+            } else {
+                System.out.println("Se espera una coma"); 
+                System.exit(0);
+            }
+        } 
+    }
+
+    private void expSimple() {
+        if (p.token == 103 || p.token == 104) {
+            signo();
+        }
+        termino();
+        if (p.token == 103 || p.token == 104) {
+            operadorAditivo();
+            termino();
+        }else if(p.token==100 || p.token==101){
+            System.out.println("Se espera un Operador");
+            System.exit(0);
+        }
+    }
+
+    private void termino() {        
+        factor();
+        if (p.token == 105 || p.token == 106) {
+            operadorMult();
+            factor();
+        }
+    }   
+
+    private void factor(){
+        switch (p.token) {
+            case 100:
+                p = p.sig;
+                break;
+
+            case 101:
+                p = p.sig;
+                break;
+            
+            case 102:
+                p = p.sig;
+                break;
+
+            case 210:
+                p=p.sig;
+                break;
+
+            case 211:
+                p=p.sig;
+                break;
+            
+            case 117:
+                p = p.sig;
+                expSimple();
+                if (p != null && p.token == 118) {
+                    p = p.sig;
+                } else {
+                    System.out.println("Se espera cierre de parentesis");
+                    System.exit(0);
+                }
+                break;
+
+            case 116:
+                p = p.sig;
+                factor();
+                break;
+
+            default:
+                System.out.println("Se espera un factor");
+                System.exit(0);
+                break;
+        }
+    }
+
+    private void variables() {
+        if (p!= null && p.token == 207) {
+            p = p.sig;
+            tipos();
+            if (p!= null && p.token == 100) {
+                p = p.sig;
+                idRecursivo();
+                if (p!=null && p.token == 125) {
+                    p = p.sig;
+                    if (p.token == 207) {
+                        variables();   
+                    }
+                } else {
+                    System.out.println("Se espera un ;");
+                    System.exit(0);
+                }
+            } else {
+                System.out.println("Se espera un identificador");
+                System.exit(0);
+            }
+        } else {
+            System.out.println("Se espera new");
+            System.exit(0);
+        }
+    }
+
+    private void tipos() {
+        switch (p.token) {
+            case 208:
+                p = p.sig;
+                break;
+            case 209:
+                p = p.sig;
+                break;
+            case 212:
+                p = p.sig;
+                break;
+            case 213:
+                p = p.sig;
+                break;
+            default:
+                System.out.println("Se espera un tipo de variable");
+                System.exit(0);
+                break;
+        }
+    }
 }

@@ -1,7 +1,23 @@
-main () {
-    print "Se realizara la pantalla "; 
-    /*Realizaremos un condicional para ver cual numero es mayor*/
-    while (n>4) {
-        print n;
+ main(){
+    new int a, b, c;
+    new float d;
+    getvalue();
+    a = 10;
+    c = 5;
+    b = c - 3 * (-2) + 3;
+    if(a<10){
+        while(a==b){
+            if(a==c){
+                 while(a==0){
+                    print (c);
+                }
+                a= a + 1;
+            }
+            if(a!=b){
+                print ("cambio");
+            }
+        }
+    }else{
+        a=(3*2)+3*(2+3);
     }
-}
+ }
